@@ -1,2 +1,1 @@
-# unity-sdk
-Unity SDK for Skillprint
+# Unity SDK for Skillprint
