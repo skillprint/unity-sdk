@@ -24,3 +24,36 @@ This pacakage is required for the Skillprint SDK to function correctly.
 
 > Select the unity package from the downloaded location
 <img width="798" alt="Pic 6" src="https://github.com/skillprint/unity-sdk/assets/91208213/7152cebf-3b77-491a-ac33-cdd5c9ba0ca3">
+
+> A window should pop up with all the assets being imported. Click `Import`
+<img width="504" alt="Pic 7" src="https://github.com/skillprint/unity-sdk/assets/91208213/793e31a8-2340-465c-add9-43376c89e332">
+
+
+At this point the Skillprint SDK setup is complete. The next section will describe some basic usage of the script.
+
+## Firing Events
+
+### Initialize
+In the GameManager or where the game is initialized, declare Skillprint and initialize it:
+```
+private Skillprint _skillprint;
+
+    private void Awake()
+    {
+
+        _skillprint = Skillprint.Instance;
+        _skillprint.Init("gameName");
+    }
+```
+
+The `gameName` is the `gameId` provided to you.
+
+### Start event log
+
+Call `_skillprint.GameSessionStart();` to initialize the logging process.
+
+### End event log and display results
+Call `_skillprint.GameSessionEnd();` to end the event logging. Optionally you can display the result as a modal over the game by calling:
+`_skillprint.ShowWebViewContent();`
+
+
