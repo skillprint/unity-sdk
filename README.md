@@ -52,8 +52,25 @@ The `gameName` is the `gameId` provided to you.
 
 Call `_skillprint.GameSessionStart();` to initialize the logging process.
 
+### Firing Custom Events
+
+Custom events can be trigged like this:
+```
+Skillprint.SendEvent(
+    "BALL_MOVEMENT", // Event Name
+    new Dictionary<string, dynamic> // Dictionary of custom parameters
+    {
+        ["speed"] = BallRigid.velocity.magnitude,
+        ["position_x"] = BallRigid.position.x,
+        ["position_y"] = BallRigid.position.y,
+        ["level_over"] = false,
+    }
+);
+```
+
 ### End event log and display results
 Call `_skillprint.GameSessionEnd();` to end the event logging. Optionally you can display the result as a modal over the game by calling:
 `_skillprint.ShowWebViewContent();`
+
 
 
