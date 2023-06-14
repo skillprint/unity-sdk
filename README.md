@@ -1,64 +1,66 @@
-# Setting up Skillprint Unity SDK
-## Download the unity SDK
-This section needs to be updated.
-
-## Import Newtonsoft Json package
-This pacakage is required for the Skillprint SDK to function correctly.
-> Go to Window > Package Manager
-
-<img width="464" alt="Pic 1" src="https://github.com/skillprint/unity-sdk/assets/91208213/42ba93a9-bf3f-442f-8ec5-16edd4a15dd2">
-
-> Click on the `+` sign and select `Add Package from git url`
-<img width="370" alt="Pic 2" src="https://github.com/skillprint/unity-sdk/assets/91208213/b533dda0-2fad-4994-bb89-c6fc1be54240">
-
-> Enter `com.unity.nuget.newtonsoft-json` and press `Add`.
-<img width="362" alt="Pic 3" src="https://github.com/skillprint/unity-sdk/assets/91208213/2b07a6d2-d5c8-4fe0-8773-e496fbe0695c">
-
-> You should be able to see the added package
-<img width="366" alt="Pic 4" src="https://github.com/skillprint/unity-sdk/assets/91208213/4dba371a-740a-4287-acb6-20ee50a0933d">
-
-## Importing Skillprint SDK
-
-> Go to Assets > Import Package > Custom Package
-<img width="605" alt="Pic 5" src="https://github.com/skillprint/unity-sdk/assets/91208213/329e2fa3-8b2f-4f08-b48a-337534e621c2">
-
-> Select the unity package from the downloaded location
-<img width="798" alt="Pic 6" src="https://github.com/skillprint/unity-sdk/assets/91208213/7152cebf-3b77-491a-ac33-cdd5c9ba0ca3">
-
-> A window should pop up with all the assets being imported. Click `Import`
-<img width="504" alt="Pic 7" src="https://github.com/skillprint/unity-sdk/assets/91208213/793e31a8-2340-465c-add9-43376c89e332">
-
-
-At this point the Skillprint SDK setup is complete. The next section will describe some basic usage of the script.
-
-## Firing Events
-
-### Initialize
-In the GameManager or where the game is initialized, declare Skillprint and initialize it:
+# This is a Pre-Release Project
+The Skillprint Unity SDK is still in early development and the Developer 
+Dashboard is not yet publicly available. We look forward to launching 
+to the public soon! Check [skillprint.co](https://skillprint.co) for the 
+latest information or to contact us for early access.
+# Get Started with the Skillprint Unity SDK
+## Add the Package to your Unity Project
+You can add this package to Unity as a Git dependency.
+1. In the Unity editor, open the package manager (Window > Package Manager)
+2. Press the + button and select "Add package from git URL..."
+3. Input the URL for this repository and press Add: 
 ```
+https://github.com/skillprint/unity-sdk.git
+```
+
+The Skillprint SDK package includes an assembly definition file which you can 
+reference from other assemblies as necessary. See the [Unity docs](
+https://docs.unity3d.com/Manual/ScriptCompilationAssemblyDefinitionFiles.html
+) for more information on using assembly references.
+
+## Initialize the SDK
+In the GameManager (or some other central location convenient to you), 
+declare Skillprint and initialize it using the Game ID provided on the 
+Developer Dashboard.
+```c#
 private Skillprint _skillprint;
 
-    private void Awake()
-    {
-
-        _skillprint = Skillprint.Instance;
-        _skillprint.Init("gameName");
-    }
+private void Awake()
+{
+    _skillprint = Skillprint.Instance;
+    _skillprint.Init("example-game-id");
+}
 ```
 
-The `gameName` is the `gameId` provided to you.
-
-### Start event log
-
-Call `_skillprint.GameSessionStart();` to initialize the logging process.
-
-### Firing Custom Events
-
-Custom events can be trigged like this:
+## Game Session Management
+When the game begins, you must call 
+```c#
+_skillprint.GameSessionStart()
 ```
-Skillprint.SendEvent(
-    "BALL_MOVEMENT", // Event Name
-    new Dictionary<string, dynamic> // Dictionary of custom parameters
+to begin writing events into a new session. This creates a new Session and 
+logs a `GAME_START` event in that Session. 
+
+To close the session, call 
+```c#
+_skillprint.GameSessionEnd()
+```
+See the Skillprint developer documentation for more information on Sessions.
+
+## Sending Standard Events
+The Skillprint Unity API provides methods to log our Standard Events as 
+described in the Developer Documentation. 
+
+*WIP: We are still finalizing these interfaces - examples coming soon!*
+
+## Sending Custom Events
+To send a custom event, use the `SendEvent` method, which takes two arguments: 
+the name of the event type you want to send, and a dynamically-valued 
+dictionary of parameters to attach to the event. See the Developer 
+Documentation for more information on using Custom Events.
+```c#
+_skillprint.SendEvent(
+    "BALL_MOVEMENT", // Event type
+    new Dictionary<string, dynamic> // Parameters
     {
         ["speed"] = BallRigid.velocity.magnitude,
         ["position_x"] = BallRigid.position.x,
@@ -68,9 +70,12 @@ Skillprint.SendEvent(
 );
 ```
 
-### End event log and display results
-Call `_skillprint.GameSessionEnd();` to end the event logging. Optionally you can display the result as a modal over the game by calling:
-`_skillprint.ShowWebViewContent();`
-
-
+### Showing the Result Panel
+If your game has defined Custom Session Metrics in the Developer Dashboard, 
+you can display the Skillprint Result Panel as a modal over the game:
+```c#
+_skillprint.ShowWebViewContent()
+```
+Note that you must [close the Session](#game-session-management) before you 
+can show Session results to the user.
 
