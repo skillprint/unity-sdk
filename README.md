@@ -8,7 +8,10 @@ latest information or to contact us for early access.
 You can add this package to Unity as a Git dependency.
 1. In the Unity editor, open the package manager (Window > Package Manager)
 2. Press the + button and select "Add package from git URL..."
-3. Input `https://github.com/skillprint/unity-sdk.git` and press "Add"
+3. Input the URL for this repository and press Add: 
+```
+https://github.com/skillprint/unity-sdk.git
+```
 
 The Skillprint SDK package includes an assembly definition file which you can 
 reference from other assemblies as necessary. See the [Unity docs](
