@@ -77,5 +77,46 @@ public class Skillprint
     {
         _skillprintCore.HideWebViewContent();
     }
+
+    // Standard Events
+    public void LevelStart(int level)
+    {
+        SendEvent(
+           "LEVEL_START",
+           new Dictionary<string, dynamic> { ["level"] = level }
+        );
+    }
+
+    public void LevelFailed(int level)
+    {
+        SendEvent(
+           "LEVEL_FAILED",
+           new Dictionary<string, dynamic> { ["level"] = level }
+        );
+    }
+
+    public void LevelComplete(int level)
+    {
+        SendEvent(
+           "LEVEL_COMPLETE",
+           new Dictionary<string, dynamic> { ["level"] = level }
+        );
+    }
+
+    public void LevelQuit(int level)
+    {
+        SendEvent(
+           "LEVEL_QUIT",
+           new Dictionary<string, dynamic> { ["level"] = level }
+        );
+    }
+
+    public void LevelRestart(int level)
+    {
+        SendEvent(
+           "LEVEL_RESTART",
+           new Dictionary<string, dynamic> { ["level"] = level }
+        );
+    }
 }
 
