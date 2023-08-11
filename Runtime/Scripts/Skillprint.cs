@@ -118,5 +118,13 @@ public class Skillprint
            new Dictionary<string, dynamic> { ["level"] = level }
         );
     }
+
+    public void Hint(int level)
+    {
+        SendEvent(
+           "HINT",
+           new Dictionary<string, dynamic> { ["level"] = level }
+        );
+    }
 }
 
