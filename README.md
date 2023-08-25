@@ -47,12 +47,13 @@ _skillprint.GameSessionEnd()
 See the Skillprint developer documentation for more information on Sessions.
 
 ## Sending Standard Events
-The Skillprint Unity API provides methods to log our Standard Events. Currently we have 5 standard events defined. They are:
+The Skillprint Unity API provides methods to log our Standard Events. Currently we have 6 standard events defined. They are:
 * LEVEL_START
 * LEVEL_COMPLETE
 * LEVEL_FAILED
 * LEVEL_QUIT
 * LEVEL_RESTART
+* HINT
 
 We have created some helper functions to fire the standard events. They are defined below:
 
@@ -61,6 +62,7 @@ We have created some helper functions to fire the standard events. They are defi
 * `public void LevelComplete(int level)`
 * `public void LevelQuit(int level)`
 * `public void LevelRestart(int level)`
+* `public void Hint(int level)`
 
 Example Usage:
 ```c#
