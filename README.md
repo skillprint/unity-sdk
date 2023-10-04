@@ -63,6 +63,8 @@ We have created some helper functions to fire the standard events. They are defi
 * `public void LevelQuit(int level)`
 * `public void LevelRestart(int level)`
 * `public void Hint(int level)`
+* `public void GenericPositive(int level)`
+* `public void GenericNegative(int level)`
 
 Example Usage:
 ```c#

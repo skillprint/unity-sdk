@@ -82,49 +82,66 @@ public class Skillprint
     public void LevelStart(int level)
     {
         SendEvent(
-           "LEVEL_START",
-           new Dictionary<string, dynamic> { ["level"] = level }
+            "LEVEL_START",
+            new Dictionary<string, dynamic> { ["level"] = level }
         );
     }
 
     public void LevelFailed(int level)
     {
         SendEvent(
-           "LEVEL_FAILED",
-           new Dictionary<string, dynamic> { ["level"] = level }
+            "LEVEL_FAILED",
+            new Dictionary<string, dynamic> { ["level"] = level }
         );
     }
 
     public void LevelComplete(int level)
     {
         SendEvent(
-           "LEVEL_COMPLETE",
-           new Dictionary<string, dynamic> { ["level"] = level }
+            "LEVEL_COMPLETE",
+            new Dictionary<string, dynamic> { ["level"] = level }
         );
     }
 
     public void LevelQuit(int level)
     {
         SendEvent(
-           "LEVEL_QUIT",
-           new Dictionary<string, dynamic> { ["level"] = level }
+            "LEVEL_QUIT",
+            new Dictionary<string, dynamic> { ["level"] = level }
         );
     }
 
     public void LevelRestart(int level)
     {
         SendEvent(
-           "LEVEL_RESTART",
-           new Dictionary<string, dynamic> { ["level"] = level }
+            "LEVEL_RESTART",
+            new Dictionary<string, dynamic> { ["level"] = level }
         );
     }
 
     public void Hint(int level)
     {
         SendEvent(
-           "HINT",
-           new Dictionary<string, dynamic> { ["level"] = level }
+            "HINT",
+            new Dictionary<string, dynamic> { ["level"] = level }
         );
     }
+
+    public void GenericPositive(int level)
+    {
+        SendEvent(
+            "GENERIC_POSITIVE",
+            new Dictionary<string, dynamic> { ["level"] = level }
+        );
+    }
+
+    public void GenericNegative(int level)
+    {
+        SendEvent(
+            "GENERIC_NEGATIVE",
+            new Dictionary<string, dynamic> { ["level"] = level }
+        );
+    }
+
 }
 
