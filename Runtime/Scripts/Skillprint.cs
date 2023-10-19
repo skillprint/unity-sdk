@@ -79,67 +79,67 @@ public class Skillprint
     }
 
     // Standard Events
-    public void LevelStart(int level)
+    public void LevelStart(IDictionary<string, dynamic> eventParams = null)
     {
         SendEvent(
             "LEVEL_START",
-            new Dictionary<string, dynamic> { ["level"] = level }
+            eventParams
         );
     }
 
-    public void LevelFailed(int level)
+    public void LevelFailed(IDictionary<string, dynamic> eventParams = null)
     {
         SendEvent(
             "LEVEL_FAILED",
-            new Dictionary<string, dynamic> { ["level"] = level }
+            eventParams
         );
     }
 
-    public void LevelComplete(int level)
+    public void LevelComplete(IDictionary<string, dynamic> eventParams = null)
     {
         SendEvent(
             "LEVEL_COMPLETE",
-            new Dictionary<string, dynamic> { ["level"] = level }
+            eventParams
         );
     }
 
-    public void LevelQuit(int level)
+    public void LevelQuit(IDictionary<string, dynamic> eventParams = null)
     {
         SendEvent(
             "LEVEL_QUIT",
-            new Dictionary<string, dynamic> { ["level"] = level }
+            eventParams
         );
     }
 
-    public void LevelRestart(int level)
+    public void LevelRestart(IDictionary<string, dynamic> eventParams = null)
     {
         SendEvent(
             "LEVEL_RESTART",
-            new Dictionary<string, dynamic> { ["level"] = level }
+            eventParams
         );
     }
 
-    public void Hint(int level)
+    public void Hint(IDictionary<string, dynamic> eventParams = null)
     {
         SendEvent(
             "HINT",
-            new Dictionary<string, dynamic> { ["level"] = level }
+            eventParams
         );
     }
 
-    public void GenericPositive(int level)
+    public void GenericPositive(IDictionary<string, dynamic> eventParams = null)
     {
         SendEvent(
             "GENERIC_POSITIVE",
-            new Dictionary<string, dynamic> { ["level"] = level }
+            eventParams
         );
     }
 
-    public void GenericNegative(int level)
+    public void GenericNegative(IDictionary<string, dynamic> eventParams = null)
     {
         SendEvent(
             "GENERIC_NEGATIVE",
-            new Dictionary<string, dynamic> { ["level"] = level }
+            eventParams
         );
     }
 
