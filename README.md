@@ -62,7 +62,7 @@ optional dictionary of properties to associate with the Event.
 
 ### Grouping Events
 By default, if you include a "level" parameter with an event, it will be used to 
-group the Event when producting Metrics on the developer dashboard. Custom grouping 
+group the Event when producing Metrics on the developer dashboard. Custom grouping 
 schemes can also be configured, but are not yet available for self-service - contact us
 for more information.
 
