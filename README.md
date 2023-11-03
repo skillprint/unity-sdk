@@ -48,37 +48,36 @@ _skillprint.GameSessionEnd()
 See the Skillprint developer documentation for more information on Sessions.
 
 ## Sending Standard Events
-The Skillprint Unity API provides methods to log our Standard Events. Currently we have 6 standard events defined. They are:
-* LEVEL_START
-* LEVEL_COMPLETE
-* LEVEL_FAILED
-* LEVEL_QUIT
-* LEVEL_RESTART
-* HINT
+We provide methods to log all our Standard Events, all of which accept an
+optional dictionary of properties to associate with the Event.
 
-We have created some helper functions to fire the standard events. They are defined below:
+- `public void LevelStart(IDictionary<string, dynamic> params = null)`
+- `public void LevelFailed(IDictionary<string, dynamic> params = null)`
+- `public void LevelComplete(IDictionary<string, dynamic> params = null)`
+- `public void LevelQuit(IDictionary<string, dynamic> params = null)`
+- `public void LevelRestart(IDictionary<string, dynamic> params = null)`
+- `public void Hint(IDictionary<string, dynamic> params = null)`
+- `public void GenericPositive(IDictionary<string, dynamic> params = null)`
+- `public void GenericNegative(IDictionary<string, dynamic> params = null)`
 
-* `public void LevelStart(int level)`
-* `public void LevelFailed(int level)`
-* `public void LevelComplete(int level)`
-* `public void LevelQuit(int level)`
-* `public void LevelRestart(int level)`
-* `public void Hint(int level)`
-* `public void GenericPositive(int level)`
-* `public void GenericNegative(int level)`
+By default, if you include a "level" parameter with an event, it will be used to 
+group the Event when producting Metrics on the developer dashboard. Custom grouping 
+schemes can also be configured, but are not yet available for self-service - contact us
+for more information.
 
 Example Usage:
 ```c#
-Skillprint.LevelStart(
-    2 // Level Number
-);
+Dictionary<string, dynamic> _params = new (){
+    ["level"] = 1  // string would also be acceptable
+};
+_skillprint.LevelStart(_params);
 ```
 
 ## Sending Custom Events
 To send a custom event, use the `SendEvent` method, which takes two arguments: 
 the name of the event type you want to send, and a dynamically-valued 
-dictionary of parameters to attach to the event. See the Developer 
-Documentation for more information on using Custom Events.
+dictionary of parameters to attach to the event. Custom Events are not yet available
+for self-service - contact us for more information.
 ```c#
 _skillprint.SendEvent(
     "BALL_MOVEMENT", // Event type
@@ -87,17 +86,6 @@ _skillprint.SendEvent(
         ["speed"] = BallRigid.velocity.magnitude,
         ["position_x"] = BallRigid.position.x,
         ["position_y"] = BallRigid.position.y,
-        ["level_over"] = false,
     }
 );
 ```
-
-### Showing the Result Panel
-If your game has defined Custom Session Metrics in the Developer Dashboard, 
-you can display the Skillprint Result Panel as a modal over the game:
-```c#
-_skillprint.ShowWebViewContent()
-```
-Note that you must [close the Session](#game-session-management) before you 
-can show Session results to the user.
-
