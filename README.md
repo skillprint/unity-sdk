@@ -48,7 +48,7 @@ _skillprint.GameSessionEnd()
 See the Skillprint developer documentation for more information on Sessions.
 
 ## Sending Standard Events
-We provide methods to log all our Standard Events, all of which accept an
+We provide methods to log all our Standard Events which accept an
 optional dictionary of properties to associate with the Event.
 
 - `public void LevelStart(IDictionary<string, dynamic> params = null)`
@@ -60,6 +60,7 @@ optional dictionary of properties to associate with the Event.
 - `public void GenericPositive(IDictionary<string, dynamic> params = null)`
 - `public void GenericNegative(IDictionary<string, dynamic> params = null)`
 
+### Grouping Events
 By default, if you include a "level" parameter with an event, it will be used to 
 group the Event when producting Metrics on the developer dashboard. Custom grouping 
 schemes can also be configured, but are not yet available for self-service - contact us
