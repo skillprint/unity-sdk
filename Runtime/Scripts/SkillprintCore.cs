@@ -72,8 +72,9 @@ public class SkillprintCore : MonoBehaviour
         yield break;
     }
 
-    public void Init()
+    public void Init(string playerId)
     {
+        _persistPlayerId(playerId);
         Debug.Log($"[Start Skillprint Core]: Starting Skillprint Core");
         _webViewObject = new GameObject("WebViewObject").AddComponent<WebViewObject>();
         _webViewObject.Init(
@@ -359,6 +360,46 @@ public class SkillprintCore : MonoBehaviour
     private string _getLogEventUrl()
     {
         return $"{APIHost}/v2/games/{GameId}/log-event/{_session.Id}/";
+    }
+
+    private string _generateNewPlayerId()
+    {
+        return Guid.NewGuid().ToString();
+    }
+
+    private void _setPlayerId(string playerId)
+    {
+        PlayerPrefs.SetString("player_id", playerId);
+        PlayerPrefs.Save();
+    }
+
+    private void _getPlayerId()
+    {
+        return PlayerPrefs.GetString("player_id");
+    }
+
+    /// <summary>
+    /// Set the player id provided by the developer if different than
+    /// currently set player id. In case, player id is not provided by
+    /// the developer, generate a uuid and store it
+    /// </summary>
+    /// <param name="playerId">The optional string name of the player id</param>
+    private void _persistPlayerId(string playerId)
+    {
+        string currentPlayerId = _getPlayerId();
+        if (playerId)
+        {
+            if (currentPlayerId !== playerId) {
+                _setPlayerId(playerId);
+            }
+        }
+        else
+        {
+            if (!currentPlayerId)
+            {
+                _setPlayerId(_generateNewPlayerId());
+            }
+        }
     }
     
     private IEnumerator _sendEventNativeCoroutine(string eventName, IDictionary<string, dynamic> eventParams = null)
