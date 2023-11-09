@@ -386,13 +386,16 @@ public class SkillprintCore : MonoBehaviour
     public void _persistPlayerId(string playerId)
     {
         string currentPlayerId = _getPlayerId();
-        if (playerId != null && currentPlayerId != playerId)
+        if (!string.IsNullOrEmpty(playerId) && currentPlayerId != playerId)
         {
             _setPlayerId(playerId);
+            Debug.Log($"Setting the playerId to the developer provided id: {playerId}");
         }
-        else if (currentPlayerId == null)
+        else if (string.IsNullOrEmpty(currentPlayerId))
         {
-            _setPlayerId(_generateNewPlayerId());
+            string generatedPlayerId = _generateNewPlayerId();
+            _setPlayerId(generatedPlayerId);
+            Debug.Log($"Setting the playerId to randomly generated id: {generatedPlayerId}");
         }
     }
     
