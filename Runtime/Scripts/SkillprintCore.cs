@@ -72,9 +72,8 @@ public class SkillprintCore : MonoBehaviour
         yield break;
     }
 
-    public void Init(string playerId)
+    public void Init()
     {
-        _persistPlayerId(playerId);
         Debug.Log($"[Start Skillprint Core]: Starting Skillprint Core");
         _webViewObject = new GameObject("WebViewObject").AddComponent<WebViewObject>();
         _webViewObject.Init(
@@ -389,7 +388,7 @@ public class SkillprintCore : MonoBehaviour
         string currentPlayerId = _getPlayerId();
         if (playerId)
         {
-            if (currentPlayerId !== playerId) {
+            if (currentPlayerId != playerId) {
                 _setPlayerId(playerId);
             }
         }
@@ -437,8 +436,11 @@ public class SkillprintCore : MonoBehaviour
 
     public void GameSessionStartNative()
     {
+        string userId = _getPlayerId();
         _session = new Session();
-        SendEventNative(SkillprintEvents.GAME_START);
+        SendEventNative(SkillprintEvents.GAME_START, new Dictionary<string, dynamic> {
+            ["userId"] = LevelNumber
+        };);
     }
 
     public void GameSessionEndNative()
