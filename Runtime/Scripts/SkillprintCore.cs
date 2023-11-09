@@ -372,7 +372,7 @@ public class SkillprintCore : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void _getPlayerId()
+    private string _getPlayerId()
     {
         return PlayerPrefs.GetString("player_id");
     }
@@ -439,8 +439,8 @@ public class SkillprintCore : MonoBehaviour
         string userId = _getPlayerId();
         _session = new Session();
         SendEventNative(SkillprintEvents.GAME_START, new Dictionary<string, dynamic> {
-            ["userId"] = LevelNumber
-        };);
+            ["userId"] = userId
+        });
     }
 
     public void GameSessionEndNative()
