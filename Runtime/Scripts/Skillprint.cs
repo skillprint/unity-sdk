@@ -4,6 +4,7 @@
  * instance over and over again.
  */
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 
@@ -42,7 +43,7 @@ public class Skillprint
         }
     }
 
-    public void Init(string GameId, string playerId)
+    public void Init(string GameId, [Optional] string playerId)
     {
         _skillprintCore = new GameObject("SkillprintCore").AddComponent<SkillprintCore>();
         _skillprintCore.GameId = GameId;

@@ -383,21 +383,16 @@ public class SkillprintCore : MonoBehaviour
     /// the developer, generate a uuid and store it
     /// </summary>
     /// <param name="playerId">The optional string name of the player id</param>
-    private void _persistPlayerId(string playerId)
+    public void _persistPlayerId(string playerId)
     {
         string currentPlayerId = _getPlayerId();
-        if (playerId)
+        if (playerId != null && currentPlayerId != playerId)
         {
-            if (currentPlayerId != playerId) {
-                _setPlayerId(playerId);
-            }
+            _setPlayerId(playerId);
         }
-        else
+        else if (currentPlayerId == null)
         {
-            if (!currentPlayerId)
-            {
-                _setPlayerId(_generateNewPlayerId());
-            }
+            _setPlayerId(_generateNewPlayerId());
         }
     }
     
