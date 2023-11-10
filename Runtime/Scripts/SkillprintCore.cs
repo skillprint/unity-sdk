@@ -386,11 +386,16 @@ public class SkillprintCore : MonoBehaviour
     public void _persistPlayerId(string playerId)
     {
         string currentPlayerId = _getPlayerId();
+        // If a valid player id is provided and it is different than
+        // the currently saved; change it and set it in PlayerPrefs
         if (!string.IsNullOrEmpty(playerId) && currentPlayerId != playerId)
         {
             _setPlayerId(playerId);
             Debug.Log($"Setting the playerId to the developer provided id: {playerId}");
         }
+        // If player id is not provided by the developer and 
+        // no player id is set in the PlayerPrefs then generate
+        // a random uuid and set the player id in the PlayerPrefs
         else if (string.IsNullOrEmpty(currentPlayerId))
         {
             string generatedPlayerId = _generateNewPlayerId();

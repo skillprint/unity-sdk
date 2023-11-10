@@ -33,6 +33,20 @@ private void Awake()
 }
 ```
 
+Another option is to provide an optional User ID with the initialization call.
+This helps with grouping of the data based on user. If User ID is not provided
+the SDK generates a random UUID and stores it.
+```c#
+private Skillprint _skillprint;
+
+private void Awake()
+{
+    _skillprint = Skillprint.Instance;
+    _skillprint.Init("example-game-id", "example-user-id");
+}
+```
+
+
 ## Game Session Management
 When the game begins, you must call 
 ```c#
