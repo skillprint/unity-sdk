@@ -47,7 +47,7 @@ public class Skillprint
         _skillprintCore = new GameObject("SkillprintCore").AddComponent<SkillprintCore>();
         _skillprintCore.GameId = gameId;
         if (playerId is null) {
-            playerId = new Guid()
+            playerId = new Guid();
         }
         _skillprintCore._persistPlayerId(playerId);
     }
