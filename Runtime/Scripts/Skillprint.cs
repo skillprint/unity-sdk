@@ -42,10 +42,13 @@ public class Skillprint
         }
     }
 
-    public void Init(string gameId, string playerId = "")
+    public void Init(string gameId, Guid? playerId = null)
     {
         _skillprintCore = new GameObject("SkillprintCore").AddComponent<SkillprintCore>();
         _skillprintCore.GameId = gameId;
+        if (playerId is null) {
+            playerId = new Guid()
+        }
         _skillprintCore._persistPlayerId(playerId);
     }
     
