@@ -360,6 +360,49 @@ public class SkillprintCore : MonoBehaviour
     {
         return $"{APIHost}/v2/games/{GameId}/log-event/{_session.Id}/";
     }
+
+    private string _generateNewPlayerId()
+    {
+        return Guid.NewGuid().ToString();
+    }
+
+    private void _setPlayerId(string playerId)
+    {
+        PlayerPrefs.SetString("player_id", playerId);
+        PlayerPrefs.Save();
+    }
+
+    private string _getPlayerId()
+    {
+        return PlayerPrefs.GetString("player_id");
+    }
+
+    /// <summary>
+    /// Set the player id provided by the developer if different than
+    /// currently set player id. In case, player id is not provided by
+    /// the developer, generate a uuid and store it
+    /// </summary>
+    /// <param name="playerId">The optional string name of the player id</param>
+    public void _persistPlayerId(string playerId)
+    {
+        string currentPlayerId = _getPlayerId();
+        // If a valid player id is provided and it is different than
+        // the currently saved; change it and set it in PlayerPrefs
+        if (!string.IsNullOrEmpty(playerId) && currentPlayerId != playerId)
+        {
+            _setPlayerId(playerId);
+            Debug.Log($"Setting the playerId to the developer provided id: {playerId}");
+        }
+        // If player id is not provided by the developer and 
+        // no player id is set in the PlayerPrefs then generate
+        // a random uuid and set the player id in the PlayerPrefs
+        else if (string.IsNullOrEmpty(currentPlayerId))
+        {
+            string generatedPlayerId = _generateNewPlayerId();
+            _setPlayerId(generatedPlayerId);
+            Debug.Log($"Setting the playerId to randomly generated id: {generatedPlayerId}");
+        }
+    }
     
     private IEnumerator _sendEventNativeCoroutine(string eventName, IDictionary<string, dynamic> eventParams = null)
     {
@@ -396,8 +439,11 @@ public class SkillprintCore : MonoBehaviour
 
     public void GameSessionStartNative()
     {
+        string userId = _getPlayerId();
         _session = new Session();
-        SendEventNative(SkillprintEvents.GAME_START);
+        SendEventNative(SkillprintEvents.GAME_START, new Dictionary<string, dynamic> {
+            ["userId"] = userId
+        });
     }
 
     public void GameSessionEndNative()
