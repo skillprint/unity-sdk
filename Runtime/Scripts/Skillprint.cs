@@ -42,17 +42,17 @@ public class Skillprint
         }
     }
 
-    public void Init(string GameId, string playerId)
+    public void Init(string gameId, string playerId = "")
     {
         _skillprintCore = new GameObject("SkillprintCore").AddComponent<SkillprintCore>();
-        _skillprintCore.GameId = GameId;
+        _skillprintCore.GameId = gameId;
         _skillprintCore._persistPlayerId(playerId);
     }
 
-    public void Init(string GameId)
-    {
-        Init(GameId, "");
-    }
+    // public void Init(string GameId)
+    // {
+    //     Init(GameId, "");
+    // }
     
 
     public void SendEvent(string eventName, IDictionary<string, dynamic> eventParams = null)
