@@ -48,11 +48,6 @@ public class Skillprint
         _skillprintCore.GameId = gameId;
         _skillprintCore._persistPlayerId(playerId);
     }
-
-    // public void Init(string GameId)
-    // {
-    //     Init(GameId, "");
-    // }
     
 
     public void SendEvent(string eventName, IDictionary<string, dynamic> eventParams = null)
